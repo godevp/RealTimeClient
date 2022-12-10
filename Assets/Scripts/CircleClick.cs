@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CircleClick : MonoBehaviour
 {
+    public Vector2 baloonPos = new Vector2();
     void Start()
     {
         
@@ -14,6 +15,6 @@ public class CircleClick : MonoBehaviour
     }
     void OnMouseDown()
     {
-        Destroy(gameObject);
+        NetworkedClientProcessing.SendMessageToServer(ClientToServerSignifiers.DestroyBaloonInPos.ToString() + '|' + baloonPos.x + '|' + baloonPos.y);
     }
 }

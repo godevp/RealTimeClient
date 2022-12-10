@@ -16,8 +16,10 @@ static public class NetworkedClientProcessing
        switch (signifier)
         {
             case ServerToClientSignifiers.PutNewBaloonToPos:
-                string [] splt = csv[1].Split(':');
-                gameLogic.SpawnNewBalloon(float.Parse(splt[0]), float.Parse(splt[1]));
+                gameLogic.SpawnNewBalloon(float.Parse(csv[1]), float.Parse(csv[2]));
+                break;
+            case ServerToClientSignifiers.DestroyBaloonByPos:
+                gameLogic.DestroyBaloonAt(float.Parse(csv[1]), float.Parse(csv[2]));
                 break;
             default:
                 break;
@@ -83,13 +85,14 @@ static public class NetworkedClientProcessing
 static public class ClientToServerSignifiers
 {
 
-    public const int ClickedOnPos = 1;
-
+    public const int DestroyBaloonInPos = 1;
+    public const int Disconnect = 2;
 }
 
 static public class ServerToClientSignifiers
 {
     public const int PutNewBaloonToPos = 1;
+    public const int DestroyBaloonByPos = 2;
 }
 #endregion
 
